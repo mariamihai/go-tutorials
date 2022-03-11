@@ -75,3 +75,51 @@ message := fmt.Sprintf("Hi, %v. Welcome!", name)
 var message string
 message = fmt.Sprintf("Hi, %v. Welcome!", name)
 ```
+
+### Multiple return values
+
+[here](https://go.dev/doc/effective_go#multiple-returns)
+
+```
+// Definition
+func Hello(name string) (string, error) {
+	if name == "" {
+		return "", errors.New("empty name")
+	}
+
+	message := fmt.Sprintf("Hi, %v. Welcome!", name)
+
+	return message, nil
+}
+
+// Calling the function
+message, err := greetings.Hello("")
+```
+
+### Named results
+
+[here](https://go.dev/doc/effective_go#named-results)
+
+- named results are initialized
+
+```
+func ReadFull(r Reader, buf []byte) (n int, err error) {
+    for len(buf) > 0 && err == nil {
+        var nr int
+        nr, err = r.Read(buf)
+        n += nr
+        buf = buf[nr:]
+    }
+    return
+}
+```
+
+## Other resources to check
+- [go.dev - Effective Go](https://go.dev/doc/effective_go)
+- [Go lang by example](https://golangbyexample.com/golang-comprehensive-tutorial/)
+- [Go by example](https://gobyexample.com/)
+- [Build Web Application with Golang](https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/index.html)
+- [GitHub - Go Courses](https://github.com/golang/go/wiki/Courses)
+- [Lets talk about logging](https://dave.cheney.net/2015/11/05/lets-talk-about-logging)
+- [Defer, panic and recover](https://go.dev/blog/defer-panic-and-recover)
+- [Defer](https://go.dev/doc/effective_go#defer)
