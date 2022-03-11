@@ -35,3 +35,23 @@ Follow along for go.dev [tutorials](https://go.dev/doc/tutorial/).
 - compile and run the `main` go package
 - single package: `go run .`
 - with path: `go run my/cmd`
+
+
+## The language
+
+### Exported name
+
+- a function named starting with a capital letter can be called by a function not in the same package
+- if calling a function from a different package with a lower letter you get an error: _cannot refer to unexported name xxxxx_
+
+### := operator
+
+- used for declaring and initializing a variable
+
+```go
+message := fmt.Sprintf("Hi, %v. Welcome!", name)
+
+// Same as
+var message string
+message = fmt.Sprintf("Hi, %v. Welcome!", name)
+```
