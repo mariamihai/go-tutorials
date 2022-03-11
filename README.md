@@ -26,6 +26,27 @@ Follow along for go.dev [tutorials](https://go.dev/doc/tutorial/).
   (changes from go 1.17)
 - [-compat] - set the version to be checked for compatibility
 
+### Edit and format go.mod file
+
+[here](https://go.dev/ref/mod#go-mod-edit)
+
+> go mod edit [editing flags] [-fmt|-print|-json] [go.mod]
+
+Example:
+> go mod edit -replace random-prefix/greetings=../greeting
+
+- [editing flags]
+  - -module, -go=version flag sets the expected Go language version, -require=path@version / -droprequire=path, 
+  -exclude=path@version / -dropexclude=path@version, -replace=old[@v]=new[@v], -dropreplace=old[@v], -retract=version / -dropretract=version
+  - can have multiple editing flags
+- [-fmt]
+  - format
+  - implicit as part of other `go mod edit` commands
+- [-print]
+  - print as text instead of writing to disk
+- [-json]
+  - returns a json instead of writing to disk
+  
 ### Run the app
 
 [here](https://pkg.go.dev/cmd/go#hdr-Compile_and_run_Go_program)
@@ -35,7 +56,6 @@ Follow along for go.dev [tutorials](https://go.dev/doc/tutorial/).
 - compile and run the `main` go package
 - single package: `go run .`
 - with path: `go run my/cmd`
-
 
 ## The language
 
