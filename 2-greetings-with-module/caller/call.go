@@ -12,7 +12,7 @@ func main() {
 	// No timestamp, source file, line number
 	log.SetFlags(0)
 
-	message, err := greetings.Hello("")
+	message, err := greetings.Hello("Go")
 
 	if err != nil {
 		log.Fatal(err)
