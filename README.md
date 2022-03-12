@@ -70,6 +70,40 @@ to be an upper case - exported name)
 More info:
 > go help testfunc
 
+### Build
+
+[here](https://pkg.go.dev/cmd/go#hdr-Compile_packages_and_dependencies)
+
+> go build [-o output] [build flags] [packages]
+
+- compiles the packages, along with their dependencies, doesn't install the results
+- ignores files that end in `_test.go`
+
+### Install
+
+[here](https://go.dev/ref/mod#go-install)
+
+> go install [build flags] [packages]
+
+- compiles and installs the packages
+- [compile and install](https://go.dev/doc/tutorial/compile-install)
+
+### List packages and modules
+
+[here](https://pkg.go.dev/cmd/go#hdr-List_packages_or_modules)
+
+> go list [-f format] [-json] [-m] [list flags] [build flags] [packages]
+
+Example:
+- the installation path after compiling `caller` into an executable
+> go list -f '{{.Target}}'
+
+- an array will all available `.go` files under current path
+> go list -f '{{.GoFiles}}'
+
+- print the package data in JSON format
+> go list -json
+
 ## The language
 
 ### Exported name
@@ -250,3 +284,6 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [testing.T type](https://pkg.go.dev/testing#T)
 - [Test_packages)](https://pkg.go.dev/cmd/go#hdr-Test_packages)
 - [Skip tests in go](https://blog.dharnitski.com/2019/04/29/skip-tests-in-go/)
+- [go build command](https://pkg.go.dev/cmd/go#hdr-Compile_packages_and_dependencies)
+- [go install command](https://go.dev/ref/mod#go-install)
+- [go list command](https://pkg.go.dev/cmd/go#hdr-List_packages_or_modules)
