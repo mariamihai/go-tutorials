@@ -57,6 +57,19 @@ Example:
 - single package: `go run .`
 - with path: `go run my/cmd`
 
+### Run tests
+
+[here](https://pkg.go.dev/cmd/go#hdr-Test_packages)
+
+> go test [build/test flags] [packages] [build/test flags & test binary flags]
+
+- run tests for files matching the filename pattern `*_test.go` and functions named `TestXxx` (after `Test` there needs 
+to be an upper case - exported name)
+- these files can contain tests, benchmark or example functions
+
+More info:
+> go help testfunc
+
 ## The language
 
 ### Exported name
@@ -223,6 +236,7 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [go.dev - Effective Go](https://go.dev/doc/effective_go)
 - [Go lang by example](https://golangbyexample.com/golang-comprehensive-tutorial/)
 - [Go by example](https://gobyexample.com/)
+- [Go go-to guide](https://yourbasic.org/golang/)
 - [GitHub - Go Courses](https://github.com/golang/go/wiki/Courses)
 - [Programiz - Getting started](https://www.programiz.com/golang/getting-started)
 - [go.dev - Modules blog series](https://go.dev/blog/using-go-modules)
@@ -233,3 +247,6 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [Slice](https://zetcode.com/golang/slice/)
 - [Build Web Application with Golang](https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/index.html)
 - [Lets talk about logging](https://dave.cheney.net/2015/11/05/lets-talk-about-logging)
+- [testing.T type](https://pkg.go.dev/testing#T)
+- [Test_packages)](https://pkg.go.dev/cmd/go#hdr-Test_packages)
+- [Skip tests in go](https://blog.dharnitski.com/2019/04/29/skip-tests-in-go/)
