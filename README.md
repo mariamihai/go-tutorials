@@ -88,6 +88,17 @@ More info:
 - compiles and installs the packages
 - [compile and install](https://go.dev/doc/tutorial/compile-install)
 
+### Remove files and clean cache
+
+- [here](https://pkg.go.dev/cmd/go#hdr-Remove_object_files_and_cached_files)
+
+> go clean [clean flags] [build flags] [packages]
+
+Example:
+> go clean -i <package-name>
+ 
+- remove the corresponding installed archive or binary added by `go install`
+
 ### List packages and modules
 
 [here](https://pkg.go.dev/cmd/go#hdr-List_packages_or_modules)
@@ -276,6 +287,8 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [go.dev - Modules blog series](https://go.dev/blog/using-go-modules)
 - [go.dev - Maps](https://go.dev/blog/maps)
 - [go.dev - The blank identifier](https://go.dev/doc/effective_go#blank)
+- [go.dev - Managing dependencies](https://go.dev/doc/modules/managing-dependencies)
+- [go.dev - Developing and publishing modules](https://go.dev/doc/modules/developing)
 - [Defer, panic and recover](https://go.dev/blog/defer-panic-and-recover)
 - [Defer](https://go.dev/doc/effective_go#defer)
 - [Slice](https://zetcode.com/golang/slice/)
@@ -284,6 +297,11 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [testing.T type](https://pkg.go.dev/testing#T)
 - [Test_packages)](https://pkg.go.dev/cmd/go#hdr-Test_packages)
 - [Skip tests in go](https://blog.dharnitski.com/2019/04/29/skip-tests-in-go/)
+- [Switches in Go](https://gobyexample.com/switch)
+- [go test command](https://pkg.go.dev/cmd/go#hdr-Test_packages)
 - [go build command](https://pkg.go.dev/cmd/go#hdr-Compile_packages_and_dependencies)
 - [go install command](https://go.dev/ref/mod#go-install)
+- [go clean command](https://pkg.go.dev/cmd/go#hdr-Remove_object_files_and_cached_files)
 - [go list command](https://pkg.go.dev/cmd/go#hdr-List_packages_or_modules)
+- [go env command](https://pkg.go.dev/cmd/go#hdr-Print_Go_environment_information)
+- [go get command](https://go.dev/ref/mod#go-get)
