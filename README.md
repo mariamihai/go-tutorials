@@ -2,6 +2,39 @@
 
 Follow along for go.dev [tutorials](https://go.dev/doc/tutorial/).
 
+<details>
+    <summary>Table of Content</summary>
+
+  - [Tutorials](#tutorials)
+  - [Commands](#commands)
+    - [Initialize a new module](#initialize-a-new-module)
+    - [Add missing dependencies or remove unused ones](#add-missing-dependencies-or-remove-unused-ones)
+    - [Edit and format go.mod file](#edit-and-format-gomod-file)
+    - [Run the app](#run-the-app)
+    - [Run tests](#run-tests)
+    - [Build](#build)
+    - [Install](#install)
+    - [Remove files and clean cache](#remove-files-and-clean-cache)
+    - [List packages and modules](#list-packages-and-modules)
+  - [The language](#the-language)
+    - [Exported name](#exported-name)
+    - [:= operator](#-operator)
+    - [Multiple return values](#multiple-return-values)
+    - [Named results](#named-results)
+    - [Arrays and slices](#arrays-and-slices)
+      - [Arrays](#arrays)
+      - [Slices](#slices)
+    - [The init function](#the-init-function)
+  - [Other resources to check](#other-resources-to-check)
+
+</details>
+
+## Tutorials
+
+- [Getting started with go](https://go.dev/doc/tutorial/getting-started)
+- [Create Go modules series](https://go.dev/doc/tutorial/create-module)
+- [RESTful API with Go and Gin](https://go.dev/doc/tutorial/web-service-gin). Tutorial's README [here](./3-restful-api).
+
 ## Commands
 
 ### Initialize a new module
@@ -279,8 +312,10 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 
 ## Other resources to check
 - [go.dev - Effective Go](https://go.dev/doc/effective_go)
-- [Go lang by example](https://golangbyexample.com/golang-comprehensive-tutorial/)
 - [Go by example](https://gobyexample.com/)
+- [freeCodeCamp.org](https://www.youtube.com/watch?v=YS4e4q9oBaU&ab_channel=freeCodeCamp.org)
+- [Udemy - Building web applications with go - intermediate level](https://www.udemy.com/course/building-web-applications-with-go-intermediate-level)
+- [Go lang by example](https://golangbyexample.com/golang-comprehensive-tutorial/)
 - [Go go-to guide](https://yourbasic.org/golang/)
 - [GitHub - Go Courses](https://github.com/golang/go/wiki/Courses)
 - [Programiz - Getting started](https://www.programiz.com/golang/getting-started)
@@ -289,6 +324,12 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [go.dev - The blank identifier](https://go.dev/doc/effective_go#blank)
 - [go.dev - Managing dependencies](https://go.dev/doc/modules/managing-dependencies)
 - [go.dev - Developing and publishing modules](https://go.dev/doc/modules/developing)
+- [go.dev - Getting started with multi-module workspaces](https://go.dev/doc/tutorial/workspaces)
+  - needs go 1.18 or later
+- [go.dev - Getting started with generics](https://go.dev/doc/tutorial/generics)
+  - needs go 1.18 or later
+- [go.dev - Getting started with fuzzing](https://go.dev/doc/tutorial/fuzz)
+  - needs go 1.18 or later
 - [Defer, panic and recover](https://go.dev/blog/defer-panic-and-recover)
 - [Defer](https://go.dev/doc/effective_go#defer)
 - [Slice](https://zetcode.com/golang/slice/)
@@ -305,3 +346,5 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [go list command](https://pkg.go.dev/cmd/go#hdr-List_packages_or_modules)
 - [go env command](https://pkg.go.dev/cmd/go#hdr-Print_Go_environment_information)
 - [go get command](https://go.dev/ref/mod#go-get)
+- [How to write go code](https://go.dev/doc/code)
+- [Go GUI projects](https://github.com/go-graphics/go-gui-projects)
