@@ -1,6 +1,5 @@
 # Go tutorials
 
-Follow along for go.dev [tutorials](https://go.dev/doc/tutorial/).
 
 <details>
     <summary>Table of Content</summary>
@@ -31,9 +30,13 @@ Follow along for go.dev [tutorials](https://go.dev/doc/tutorial/).
 
 ## Tutorials
 
+Follow along for go.dev [tutorials](https://go.dev/doc/tutorial/):
 - [Getting started with go](https://go.dev/doc/tutorial/getting-started)
 - [Create Go modules series](https://go.dev/doc/tutorial/create-module)
 - [RESTful API with Go and Gin](https://go.dev/doc/tutorial/web-service-gin). Tutorial's README [here](./3-restful-api).
+
+Follow along for [freeCodeCamp tutorials](https://www.youtube.com/watch?v=YS4e4q9oBaU&ab_channel=freeCodeCamp.org). 
+Tutorial's README [here](./4-freeCodeCamp-Learn-Go-Programming).
 
 ## Commands
 
@@ -318,6 +321,7 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [Go lang by example](https://golangbyexample.com/golang-comprehensive-tutorial/)
 - [Go go-to guide](https://yourbasic.org/golang/)
 - [GitHub - Go Courses](https://github.com/golang/go/wiki/Courses)
+- [Golang Programs](https://www.golangprograms.com/go-language.html)
 - [Programiz - Getting started](https://www.programiz.com/golang/getting-started)
 - [go.dev - Modules blog series](https://go.dev/blog/using-go-modules)
 - [go.dev - Maps](https://go.dev/blog/maps)
@@ -337,8 +341,14 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [Lets talk about logging](https://dave.cheney.net/2015/11/05/lets-talk-about-logging)
 - [testing.T type](https://pkg.go.dev/testing#T)
 - [Test_packages)](https://pkg.go.dev/cmd/go#hdr-Test_packages)
+- [Sorting a slice of a given struct by multiple fields](https://www.linkedin.com/pulse/golang-sorting-slice-given-struct-multiple-fields-tiago-melo/)
 - [Skip tests in go](https://blog.dharnitski.com/2019/04/29/skip-tests-in-go/)
+- [White box testing](https://devmethodologies.blogspot.com/2013/11/unit-tests-white-box-testing.html)
 - [Switches in Go](https://gobyexample.com/switch)
+- [Map string interface](https://bitfieldconsulting.com/golang/map-string-interface)
+- [Methods in Go](https://go101.org/article/method.html)
+- [Method Sets - pointer vs value receiver](https://stackoverflow.com/questions/33587227/method-sets-pointer-vs-value-receiver)
+- [Difference between T and T* method sets in Go](https://gronskiy.com/posts/2020-04-golang-pointer-vs-value-methods/)
 - [go test command](https://pkg.go.dev/cmd/go#hdr-Test_packages)
 - [go build command](https://pkg.go.dev/cmd/go#hdr-Compile_packages_and_dependencies)
 - [go install command](https://go.dev/ref/mod#go-install)
@@ -348,3 +358,21 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [go get command](https://go.dev/ref/mod#go-get)
 - [How to write go code](https://go.dev/doc/code)
 - [Go GUI projects](https://github.com/go-graphics/go-gui-projects)
+- [Dave Cheney blog](https://dave.cheney.net/)
+- [Reflect pkg](https://pkg.go.dev/reflect)
+- [Reflection in Golang](https://www.geeksforgeeks.org/reflection-in-golang/)
+- [Reflection in Go](https://golangbot.com/reflection/)
+- [Reflection - golangprograms](https://www.golangprograms.com/reflection-in-golang.html)
+
+Exercises and challenges:
+- [Codewars](https://www.codewars.com/)
+- [Kattis](https://www.kattis.com/)
+- [Gophercises](https://gophercises.com/)
+- [Golangr](https://golangr.com/exercises/)
+- [TutorialEdge](https://tutorialedge.net/challenges/go/)
+- [GitHub - Plutov](https://github.com/plutov/practice-go)
+- [GitHub - inancgumus](https://github.com/inancgumus/learngo)
+- [GitHub - RajaSrinivasan](https://github.com/RajaSrinivasan/assignments)
+- [exercism](https://exercism.org/)
+- [HackerRank](https://www.hackerrank.com/)
+- [Go Bootcamp](https://www.golangbootcamp.com/book/exercises)
