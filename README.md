@@ -6,15 +6,25 @@
 
   - [Tutorials](#tutorials)
   - [Commands](#commands)
-    - [Initialize a new module](#initialize-a-new-module)
-    - [Add missing dependencies or remove unused ones](#add-missing-dependencies-or-remove-unused-ones)
-    - [Edit and format go.mod file](#edit-and-format-gomod-file)
-    - [Run the app](#run-the-app)
-    - [Run tests](#run-tests)
-    - [Build](#build)
-    - [Install](#install)
-    - [Remove files and clean cache](#remove-files-and-clean-cache)
-    - [List packages and modules](#list-packages-and-modules)
+    - go mod init - [Initialize a new module](#initialize-a-new-module)
+    - go mod tidy - [Add missing dependencies or remove unused ones](#add-missing-dependencies-or-remove-unused-ones)
+    - go mod edit - [Edit and format go.mod file](#edit-and-format-gomod-file)
+    - go mod vendor - [Copy dependencies with mod vendor](#copy-dependencies-with-mod-vendor)
+    - go run - [Run the app](#run-the-app)
+    - go test - [Run tests](#run-tests)
+    - go build - [Build](#build)
+    - go install - [Install](#install)
+    - go fmt - [Format files](#format-files)
+    - go fix- [Update packages to use new APIs](#update-packages-to-use-new-apis)
+    - go vet - [Get mistakes with go vet](#get-mistakes-with-go-vet)
+    - go clean - [Remove files and clean cache](#remove-files-and-clean-cache)
+    - go list - [List packages and modules](#list-packages-and-modules)
+    - go doc - [Generate documentation](#generate-documentation)
+    - [Debugging](#debugging)
+    - [Linting & fixing common problems](#linting--fixing-common-problems)
+        - [golint (deprecated)](#golint-deprecated)
+        - [revive](#revive)
+        - [go vet](#go-vet)
   - [The language](#the-language)
     - [Exported name](#exported-name)
     - [:= operator](#-operator)
@@ -82,7 +92,20 @@ Example:
   - print as text instead of writing to disk
 - `[-json]`
   - returns a json instead of writing to disk
-  
+
+### Copy dependencies with mod vendor
+
+[here](https://pkg.go.dev/cmd/go#hdr-Make_vendored_copy_of_dependencies) and [here](https://go.dev/ref/mod#go-mod-vendor)
+
+> go mod vendor [-e] [-v] [-o outdir]
+
+- `[-v]`
+  - print the names of vendored modules and packages to standard error
+- `[-e]`
+  - causes vendor to attempt to proceed despite errors encountered while loading packages
+- `[-o]`
+  - causes vendor to create the vendor directory at the given path instead of "vendor"
+
 ### Run the app
 
 [here](https://pkg.go.dev/cmd/go#hdr-Compile_and_run_Go_program)
@@ -124,6 +147,44 @@ More info:
 - compiles and installs the packages
 - [compile and install](https://go.dev/doc/tutorial/compile-install)
 
+### Format files
+
+[here](https://pkg.go.dev/cmd/go#hdr-Gofmt__reformat__package_sources)
+
+> go fmt [-n] [-x] [packages]
+
+- `[-n]`
+  - prints commands that would be executed
+- `[-x]`
+  - prints commands as they are executed
+- `[-mod]`
+  - sets which module download mode to use: `readonly` or `vendor`
+
+### Update packages to use new APIs
+
+> go fix [-fix list] [packages]
+
+- `[-fix]`
+  - sets a comma-separated list of fixes to run. The default is all known fixes.
+
+### Get mistakes with go vet
+
+[here](https://pkg.go.dev/cmd/go#hdr-Report_likely_mistakes_in_packages)
+
+> go vet [-n] [-x] [-vettool prog] [build flags] [vet flags] [packages]
+
+- `[-n]`
+  - prints commands that would be executed
+- `[-x]`
+  - prints commands as they are executed
+- `[-vettool=prog]`
+  - selects a different analysis tool with alternative or additional checks
+
+Example:
+- the 'shadow' analyzer can be built and run:
+> go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow
+> go vet -vettool=$(which shadow)
+
 ### Remove files and clean cache
 
 - [here](https://pkg.go.dev/cmd/go#hdr-Remove_object_files_and_cached_files)
@@ -150,6 +211,81 @@ Example:
 
 - print the package data in JSON format
 > go list -json
+
+### Generate documentation
+
+[here](https://pkg.go.dev/cmd/go#hdr-Show_documentation_for_package_or_symbol)
+
+> go doc [doc flags] [package|[package.]symbol[.methodOrField]]
+
+Example:
+- documentation for formatting files
+> go doc cmd/gofmt
+- show all documentation for the package
+> go doc -all
+
+### Debugging
+
+The standard debugger for Go applications is [Delve](https://github.com/go-delve/delve) - [commands](https://github.com/go-delve/delve/blob/master/Documentation/usage/dlv.md)
+
+> go install github.com/go-delve/delve/cmd/dlv@latest
+
+Check it was correctly installed with `dlv version` or with a path `~/go/bin/dlv`.
+
+Using Delve:
+> dlv debug main.go
+> break bp1 main.main:3
+> condition bp1 i == 2
+> continue
+> next
+> step
+> stepout
+> restart
+> exit
+
+> print <expr>
+> set <variable> = <value>
+> locals
+> whatis <expr>
+
+### Linting & fixing common problems
+
+#### golint (deprecated)
+
+- applies the rules based on [Effective Go](https://go.dev/doc/effective_go) and a collection of comments from [code reviews](https://github.com/golang/go/wiki/CodeReviewComments).
+- can't be configured
+
+#### revive
+
+[here](https://github.com/mgechev/revive)
+
+- provides support for controlling which rules are applied
+
+> go install github.com/mgechev/revive@latest
+> revive
+
+- you can disable or enable a rule in code:
+```
+// revive:disable:exported
+// revive:enable:exported
+``` 
+
+- the configuration file for this linter is `revive.toml` 
+    - options [here](https://github.com/mgechev/revive#configuration)
+    - recoomented configuration [here](https://github.com/mgechev/revive#recommended-configuration)
+- run the linter with configuration file
+> revive -config revive.toml
+
+#### go vet
+
+> go vet
+> go vet main.go
+> go vet -json main.go
+
+> go vet -assign=false
+> go vet -assign
+
+
 
 ## The language
 
