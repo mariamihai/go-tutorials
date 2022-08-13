@@ -1,2 +1,5 @@
 /.idea/
 *.exe
+/1-getting-started-with-go/vendor/
+/2-greetings-with-module/caller/vendor/
+/3-restful-api/vendor/

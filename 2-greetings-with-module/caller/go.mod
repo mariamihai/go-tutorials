@@ -1,6 +1,6 @@
 module random-prefix/caller
 
-go 1.17
+go 1.19
 
 replace random-prefix/greetings => ../greetings
 

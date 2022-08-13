@@ -1,3 +1,3 @@
 module random-prefix/greetings
 
-go 1.17
+go 1.19

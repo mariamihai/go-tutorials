@@ -1,6 +1,6 @@
 module random-prefix/hello
 
-go 1.17
+go 1.19
 
 require rsc.io/quote v1.5.2
 
