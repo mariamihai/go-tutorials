@@ -15,7 +15,7 @@
     - go build - [Build](#build)
     - go install - [Install](#install)
     - go fmt - [Format files](#format-files)
-    - go fix- [Update packages to use new APIs](#update-packages-to-use-new-apis)
+    - go fix - [Update packages to use new APIs](#update-packages-to-use-new-apis)
     - go vet - [Get mistakes with go vet](#get-mistakes-with-go-vet)
     - go clean - [Remove files and clean cache](#remove-files-and-clean-cache)
     - go list - [List packages and modules](#list-packages-and-modules)
@@ -34,6 +34,18 @@
       - [Arrays](#arrays)
       - [Slices](#slices)
     - [The init function](#the-init-function)
+  - [Random](#random)
+    - [go:embed](#goembed)
+        - [Simple use](#simple-use)
+        - [Use conditionally](#use-conditionally)
+        - [Gotchas](#gotchas)
+    - [go:generate](#gogenerate)
+        - [Alternative - using -ldflags](#alternative---using--ldflags)
+        - [go:generate use](#gogenerate-use)
+        - [Links](#links)
+    - [Build Constraints](#build-constraints)
+    - [flag.Func](#flagfunc)
+  - [Testing and linting in pipeline](#testing-and-linting-in-pipeline)
   - [Other resources to check](#other-resources-to-check)
 
 </details>
@@ -285,8 +297,6 @@ Using Delve:
 > go vet -assign=false
 > go vet -assign
 
-
-
 ## The language
 
 ### Exported name
@@ -449,6 +459,170 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - first the imported packages are initialized, then the global variables are initialized, then the `init` function is called
 - each file can have multiple init `functions`
 
+## Random
+
+### go:embed
+
+- [documentation](https://pkg.go.dev/embed) and [article link](https://blog.carlmjohnson.net/post/2021/how-to-use-go-embed/)
+- include the contents of arbitrary files and directories with `//go:embed FILENAME(S)` followed by 
+a `string` or `[]byte` variable for one file or `embed.FS` for a group of files
+- patterns like `files/*.html` will also work (but not `**/*.html` recursive globbing)
+
+#### Simple use
+
+```go
+package main
+
+import (
+    _ "embed"
+    "fmt"
+    "strings"
+)
+
+var (
+    Version string = strings.TrimSpace(version)
+    //go:embed version.txt
+    version string
+)
+
+func main() {
+    fmt.Printf("Version %q\n", Version)
+}
+```
+
+#### Use conditionally
+
+Include version information conditionally based on whether a build tag is passed to the go tools:
+```go
+// version_dev.go file:
+
+//go:build !prod
+// +build !prod
+
+package main
+
+var version string = "dev"
+```
+
+Run:
+```bash
+$ go run .
+Version "dev"
+```
+
+```go
+// version_prod.go file:
+
+//go:build prod
+// +build prod
+
+package main
+
+import (
+    _ "embed"
+)
+
+//go:embed version.txt
+var version string
+```
+
+Run:
+```bash
+$ go run -tags prod .
+Version "0.0.1"
+```
+
+#### Gotchas
+
+- need to import the `embed` package in any file that uses an embed directive
+- can only use `//go:embed` for variables at the package level, not within functions or methods
+- when you include a directory, it won’t include files that start with `.` or `_`, but if you use a wildcard, 
+like `dir/*`, it will include all files that match, even if they start with `.` or `_`
+    - use `//go:embed dir` or `//go:embed dir/*.ext` for security reasons (otherwise you will accidentally include Mac OS's `.DS_Store`)
+- for security reasons, Go also won’t follow symbolic links or go up a directory when embedding
+
+### go:generate
+
+- [article link](https://blog.carlmjohnson.net/post/2016-11-27-how-to-use-go-generate/)
+- automate the running of tools to generate source code before compilation
+
+#### Alternative - using -ldflags
+
+Can use `-ldflags` to override string values:
+```go
+package main
+
+import (
+	"fmt"
+)
+
+var VersionString = "unset"
+
+func main() {
+	fmt.Println("Version:", VersionString)
+}
+```
+
+Run:
+```bash
+$ go run main.go
+Version: unset
+
+$ go run -ldflags '-X main.VersionString=1.0' main.go
+Version: 1.0
+
+# Can use git commit hash:
+$ go run -ldflags "-X main.VersionString=`git rev-parse HEAD`" main.go
+Version: db5c7db9fe3b632407e9f0da5f7982180c438929
+
+# Need single quote if there is a space
+$ go run -ldflags "-X 'main.VersionString=1.0 (beta)'" main.go
+Version: 1.0 (beta)
+
+# Ca use the standard Unix date command
+$ go run -ldflags "-X 'main.VersionString=`date`'" main.go
+Version: Sun Nov 27 16:42:10 EST 2016
+```
+
+#### go:generate use
+
+```go
+package project
+
+//go:generate echo Hello, Go Generate!
+
+func Add(x, y int) int {
+	return x + y
+}
+```
+
+Run:
+```bash
+$ go generate
+Hello, Go Generate!
+```
+
+Can be used with tools like [stringer](https://pkg.go.dev/golang.org/x/tools/cmd/stringer), 
+[jsonenums](https://github.com/campoy/jsonenums) and [schematyper](https://github.com/idubinskiy/schematyper).
+
+#### Links
+
+- [Eli Bendersky's website](https://eli.thegreenplace.net/2021/a-comprehensive-guide-to-go-generate/)
+- [Reducing boilerplate with go generate](https://blog.gopheracademy.com/advent-2015/reducing-boilerplate-with-go-generate/)
+
+### Build Constraints
+
+- [documentation](https://pkg.go.dev/go/build#hdr-Build_Constraints), [go help buildconstraint](https://pkg.go.dev/cmd/go#hdr-Build_constraints)
+- condition under which a file should be included in the package
+
+### flag.Func
+
+- [article link](https://blog.carlmjohnson.net/post/2020/add-func/)
+
+## Testing and linting in pipeline
+
+Project [here](https://github.com/mariamihai/test-go-github-actions) for GitHub Actions use.
+
 ## Other resources to check
 - [go.dev - Effective Go](https://go.dev/doc/effective_go)
 - [Go by example](https://gobyexample.com/)
@@ -499,6 +673,11 @@ a = append(a, b...) // a = append(a, b[0], b[1], b[2])
 - [Reflection in Golang](https://www.geeksforgeeks.org/reflection-in-golang/)
 - [Reflection in Go](https://golangbot.com/reflection/)
 - [Reflection - golangprograms](https://www.golangprograms.com/reflection-in-golang.html)
+
+
+- [Go and Proxy Servers](https://eli.thegreenplace.net/2022/go-and-proxy-servers-part-1-http-proxies/)
+- [Serving static files and web apps](https://eli.thegreenplace.net/2022/serving-static-files-and-web-apps-in-go/)
+
 
 Exercises and challenges:
 - [Codewars](https://www.codewars.com/)
